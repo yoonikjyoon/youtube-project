@@ -1,0 +1,17 @@
+.container {
+  background-color: var(--white-color);
+  width: 100%;
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  border: 1px solid red;
+}
+.logo {
+  border: 1px solid blue;
+}
+.search {
+  border: 1px solid green;
+}
