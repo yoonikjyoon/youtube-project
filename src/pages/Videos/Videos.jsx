@@ -17,7 +17,7 @@ export default function Videos() {
   if (error) return <p>{error}</p>;
   return (
     <div className={styles.container}>
-      <ul>
+      <ul className={styles.videos}>
         {videos.items.map((item) => (
           <li key={item.id}>{item.snippet["title"]}</li>
         ))}
