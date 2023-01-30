@@ -9,7 +9,7 @@ export const getDateDiff = (date) => {
   const days = hours / 24;
   if (days < 7) return `${Math.floor(days)}days ago`;
   const weeks = days / 7;
-  if (weeks < 5) return `${Math.foor(weeks)}weeks ago`;
+  if (weeks < 5) return `${Math.floor(weeks)}weeks ago`;
   const months = weeks / 36;
   if (months < 12) return `${Math.floor(months)}months ago`;
   const years = days / 365;

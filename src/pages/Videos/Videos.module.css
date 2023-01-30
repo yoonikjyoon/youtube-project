@@ -1,7 +1,7 @@
 .container {
   width: 100%;
-  padding: 0 30px;
-  border: 1px solid blue;
+  padding: 30px;
+  /* border: 1px solid blue; */
 }
 .videos {
   width: 100%;
@@ -13,4 +13,17 @@
   /* width: 33%;
   height:  */
   border: 1px solid pink;
+}
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(0, 115, 255);
+  margin-bottom: 5px;
+}
+.channelTitle {
+  margin-bottom: 5px;
+}
+.publishedAt {
+  font-size: 0.8rem;
+  color: gray;
 }
