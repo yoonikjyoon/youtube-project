@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Videos.module.css";
 import { useQuery } from "@tanstack/react-query";
+import { getDateDiff } from "../../utils/date";
 
 export default function Videos() {
   const {
@@ -19,7 +20,14 @@ export default function Videos() {
     <div className={styles.container}>
       <ul className={styles.videos}>
         {videos.items.map((item) => (
-          <li key={item.id}>{item.snippet["title"]}</li>
+          <li key={item.id} className={styles.video}>
+            <img
+              src={item.snippet.thumbnails.medium.url}
+              alt={`${item.snippet.title}`}
+            />
+            <p>{item.snippet.title}</p>
+            <p>{getDateDiff(item.snippet.publishedAt)}</p>
+          </li>
         ))}
       </ul>
     </div>

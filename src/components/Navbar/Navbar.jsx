@@ -6,7 +6,6 @@ export default function Navbar() {
     <div className={styles.container}>
       <div className={styles.logo}>logo</div>
       <div className={styles.search}>
-        search
         <input type="text" />
       </div>
     </div>
