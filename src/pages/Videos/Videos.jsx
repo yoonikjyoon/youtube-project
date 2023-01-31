@@ -12,16 +12,24 @@ export default function Videos() {
     isLoading,
     error,
     data: videos,
-  } = useQuery(["videos"], async () => {
-    console.log("fetching");
+  } = useQuery(["videos", keyword], async () => {
+    return fetch(
+      `data/${keyword ? "list_by_keyword" : "list_by_most_popular_videos"}.json`
+    )
+      .then((res) => res.json())
+      .then((data) => data.items);
+    // } = useQuery(["videos"], async () => {
+    //   console.log("fetching");
+    //////////////////
     // return keyword
     //   ? fetch("data/list_by_keyword.json").then((res) => res.json())
     //   : fetch("data/list_by_most_popular_videos.json").then((res) =>
     //       res.json()
     //     );
-    return fetch("data/list_by_most_popular_videos.json").then((res) =>
-      res.json()
-    );
+    //////////////////
+    // return fetch("data/list_by_most_popular_videos.json").then((res) =>
+    //   res.json()
+    // );
   });
   // useEffect(() => {
   //   client.invalidateQueries(["videos"]);
@@ -35,7 +43,7 @@ export default function Videos() {
   return (
     <div className={styles.container}>
       <ul className={styles.videos}>
-        {videos.items.map((item) => (
+        {videos.map((item) => (
           <li
             key={item.id}
             className={styles.video}
