@@ -3,7 +3,9 @@ import styles from "./Videos.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import VideoCard from "../../components/VideoCard/VideoCard";
-import axios from "axios";
+import { search } from "../../api/youtube";
+import FakeYoutube from "../../api/fakeYoutube";
+import Youtube from "../../api/youtube";
 
 export default function Videos() {
   const { keyword } = useParams();
@@ -11,15 +13,10 @@ export default function Videos() {
     isLoading,
     error,
     data: videos,
-    // 두가지 필요한것 : []안에 캐시key, 어떻게 가지고올 것인지 함수
-  } = useQuery(["videos", keyword], async () => {
-    return axios
-      .get(
-        `/data/${
-          keyword ? "list_by_keyword" : "list_by_most_popular_videos"
-        }.json`
-      )
-      .then((res) => res.data.items);
+  } = useQuery(["videos", keyword], () => {
+    const youtube = new FakeYoutube();
+    // const youtube = new Youtube();
+    return youtube.search(keyword);
   });
 
   return (
@@ -29,10 +26,7 @@ export default function Videos() {
       {videos && (
         <ul className={styles.videos}>
           {videos.map((video) => (
-            <VideoCard
-              key={keyword ? video.id.videoId : video.id}
-              video={video}
-            />
+            <VideoCard key={video.id} video={video} />
           ))}
         </ul>
       )}
