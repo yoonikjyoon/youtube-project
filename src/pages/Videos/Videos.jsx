@@ -1,66 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Videos.module.css";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getDateDiff } from "../../utils/date";
-import { useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import VideoCard from "../../components/VideoCard/VideoCard";
 
 export default function Videos() {
   const { keyword } = useParams();
-  const client = useQueryClient();
-  const navigate = useNavigate();
   const {
     isLoading,
     error,
     data: videos,
+    // 두가지 필요한것 : []안에 캐시key, 어떻게 가지고올 것인지 함수
   } = useQuery(["videos", keyword], async () => {
     return fetch(
-      `data/${keyword ? "list_by_keyword" : "list_by_most_popular_videos"}.json`
+      `/data/${
+        keyword ? "list_by_keyword" : "list_by_most_popular_videos"
+      }.json`
     )
       .then((res) => res.json())
       .then((data) => data.items);
-    // } = useQuery(["videos"], async () => {
-    //   console.log("fetching");
-    //////////////////
-    // return keyword
-    //   ? fetch("data/list_by_keyword.json").then((res) => res.json())
-    //   : fetch("data/list_by_most_popular_videos.json").then((res) =>
-    //       res.json()
-    //     );
-    //////////////////
-    // return fetch("data/list_by_most_popular_videos.json").then((res) =>
-    //   res.json()
-    // );
   });
-  // useEffect(() => {
-  //   client.invalidateQueries(["videos"]);
-  // }, [keyword, client]);
-  const onClickVideo = (videoId) => {
-    console.log(videoId);
-    navigate(`/videos/watch/${videoId}`);
-  };
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+
   return (
     <div className={styles.container}>
-      <ul className={styles.videos}>
-        {videos.map((item) => (
-          <li
-            key={item.id}
-            className={styles.video}
-            onClick={() => onClickVideo(item.id)} // 그냥 onClickVideo하면 모든 li에 동작!! () => 기억 🔥
-          >
-            <img
-              src={item.snippet.thumbnails.medium.url}
-              alt={`${item.snippet.title}`}
+      {isLoading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {videos && (
+        <ul className={styles.videos}>
+          {videos.map((video) => (
+            <VideoCard
+              key={keyword ? video.id.videoId : video.id}
+              video={video}
             />
-            <p className={styles.title}>{item.snippet.title}</p>
-            <p className={styles.channelTitle}>{item.snippet.channelTitle}</p>
-            <p className={styles.publishedAt}>
-              {getDateDiff(item.snippet.publishedAt)}
-            </p>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

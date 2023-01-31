@@ -1,0 +1,18 @@
+.video {
+  /* width: 33%;
+    height:  */
+  border: 1px solid pink;
+}
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(0, 115, 255);
+  margin-bottom: 5px;
+}
+.channelTitle {
+  margin-bottom: 5px;
+}
+.publishedAt {
+  font-size: 0.8rem;
+  color: gray;
+}
