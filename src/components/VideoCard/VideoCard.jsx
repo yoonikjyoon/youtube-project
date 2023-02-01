@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./VideoCard.module.css";
 import { useNavigate } from "react-router-dom";
 import { formatAgo, getDateDiff } from "../../utils/date";
@@ -9,15 +9,6 @@ export default function VideoCard({ video }) {
   const onClickVideo = (videoId) => {
     navigate(`/videos/watch/${videoId}`);
   };
-  // const handleResize = () => {
-  //   console.log("--", window.innerWidth);
-  // };
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
   return (
     //  그냥 onClickVideo하면 모든 자식데이터에 동작!! () => 기억 🔥
     <li className={styles.video} onClick={() => onClickVideo(video.id)}>
