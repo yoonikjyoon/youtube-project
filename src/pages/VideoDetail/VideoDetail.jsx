@@ -8,6 +8,7 @@ export default function VideoDetail({ video }) {
   const { videoId } = useParams();
   return (
     <div className={styles.container}>
+      {/* {videoId} */}
       <Video videoId={videoId} />
       <RelatedVideos videoId={videoId} />
     </div>
