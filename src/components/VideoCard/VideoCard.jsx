@@ -7,7 +7,7 @@ export default function VideoCard({ video }) {
   const navigate = useNavigate();
   const { title, thumbnails, channelTitle, publishedAt } = video.snippet;
   const onClickVideo = (videoId) => {
-    navigate(`/videos/watch/${videoId}`);
+    navigate(`/videos/watch/${videoId}`, { state: { video } });
   };
   return (
     //  그냥 onClickVideo하면 모든 자식데이터에 동작!! () => 기억 🔥

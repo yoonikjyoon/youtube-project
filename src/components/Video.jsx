@@ -1,39 +1,26 @@
-import React, { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useYoutubeApi } from "../context/YoutubeApiContext";
+import React from "react";
+import ChannelInfo from "./ChannelInfo";
 
-export default function Video({ videoId }) {
-  const { youtube } = useYoutubeApi();
-  const {
-    isLoading,
-    error,
-    data: video,
-  } = useQuery(["video", videoId], () => youtube.detail(videoId));
-
+export default function Video({ video }) {
+  const { title, channelId, channelTitle, description } = video.snippet;
   return (
     <div className="border border-solid border-white">
-      {/* {video && video.map((item) => (
-                <>
-                <video className="w-full" controlsList="nodownload" src="" />
-                비디오자리
-                <div className="border border-solid border-red-300">
-                  <p>타이틀 :</p>
-                  <div>채널 이미지 + 채널명</div>
-                  <div> 설명</div>
-                </div>
-              </>
-      ))} */}
-      {video && (
-        <>
-          <video className="w-full" controlsList="nodownload" src="" />
-          비디오자리
-          <div className="border border-solid border-red-300">
-            <p>{video[0].snippet.title}</p>
-            <div>채널 이미지 + 채널명</div>
-            <div>{video[0].snippet.description}</div>
-          </div>
-        </>
-      )}
+      <section>
+        <iframe
+          id="player"
+          title={video.id}
+          type="text/html"
+          width="100%"
+          height="640"
+          src={`http://www.youtube.com/embed/${video.id}`}
+          frameBorder="0"
+        ></iframe>
+      </section>
+      <div className="border border-solid border-red-300">
+        <p>{title}</p>
+        <ChannelInfo id={channelId} name={channelTitle} />
+        <pre>{description}</pre>
+      </div>
     </div>
   );
 }
