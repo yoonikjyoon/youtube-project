@@ -14,8 +14,8 @@ export default function RelatedVideos({ video }) {
   } = useQuery(["related", video.id], () => youtube.relatedVideos(video.id), {
     staleTime: 1000 * 60 * 5,
   });
-  const onClickVideo = (videoId) => {
-    navigate(`/videos/watch/${videoId}`);
+  const onClickVideo = (videoId, video) => {
+    navigate(`/videos/watch/${videoId}`, { state: { video } });
   };
   return (
     <>
@@ -27,7 +27,7 @@ export default function RelatedVideos({ video }) {
             <div
               className="cursor-pointer w-full flex mb-3"
               key={video.id}
-              onClick={() => onClickVideo(video.id)}
+              onClick={() => onClickVideo(video.id, video)}
             >
               <img
                 className="w-3/6 mr-3"
