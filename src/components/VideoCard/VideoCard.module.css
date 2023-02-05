@@ -1,5 +1,6 @@
 .video:hover {
   transform: scale(1.1);
+  background-color: rgb(24 24 27);
 }
 .video img {
   width: 100%;
