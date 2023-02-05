@@ -14,16 +14,18 @@ export default class Youtube {
   }
 
   async relatedVideos(id) {
-    return this.search({
-      params: {
-        part: "snippet",
-        maxResults: 25,
-        type: "video",
-        relatedToVideoId: id,
-      },
-    }).then((res) =>
-      res.data.items.map((item) => ({ ...item, id: item.id.videoId }))
-    );
+    return this.apiClient
+      .search({
+        params: {
+          part: "snippet",
+          maxResults: 25,
+          type: "video",
+          relatedToVideoId: id,
+        },
+      })
+      .then((res) =>
+        res.data.items.map((item) => ({ ...item, id: item.id.videoId }))
+      );
   }
 
   async #searchByKeyword(keyword) {
