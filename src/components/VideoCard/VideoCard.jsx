@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./VideoCard.module.css";
 import { useNavigate } from "react-router-dom";
-import { formatAgo, getDateDiff } from "../../utils/date";
+import { formatAgo } from "../../utils/date"; // getDateDiff
 
 export default function VideoCard({ video }) {
   const navigate = useNavigate();

@@ -4,11 +4,11 @@ import ChannelInfo from "./ChannelInfo";
 export default function Video({ video }) {
   const { title, channelId, channelTitle, description } = video.snippet;
   return (
-    <div className="border border-solid border-white">
+    <div className="">
       <section>
         <iframe
           id="player"
-          title={video.id}
+          title={title}
           type="text/html"
           width="100%"
           height="640"
@@ -16,10 +16,12 @@ export default function Video({ video }) {
           frameBorder="0"
         ></iframe>
       </section>
-      <div className="border border-solid border-red-300">
-        <p>{title}</p>
+      <div className="p-8">
+        <p className="text-xl font-bold">{title}</p>
         <ChannelInfo id={channelId} name={channelTitle} />
-        <pre>{description}</pre>
+        <pre className="whitespace-pre-wrap break-all overflow-y-auto">
+          {description}
+        </pre>
       </div>
     </div>
   );
